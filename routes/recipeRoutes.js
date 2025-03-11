@@ -9,6 +9,7 @@ router.get('/', async (req, res) => {
         const recipes = await Recipe.find();
         res.json(recipes);
     } catch (err) {
+        console.error("Error fetching all recipes:", err); // Added logging
         res.status(500).json({ error: err.message });
     }
 });
@@ -20,6 +21,7 @@ router.get('/:id', async (req, res) => {
         if (!recipe) return res.status(404).json({ message: 'Recipe not found' });
         res.json(recipe);
     } catch (err) {
+        console.error("Error fetching recipe:", err); // Added logging
         res.status(500).json({ error: err.message });
     }
 });
@@ -32,6 +34,7 @@ router.post('/', async (req, res) => {
         await newRecipe.save();
         res.status(201).json(newRecipe);
     } catch (err) {
+        console.error("Error creating recipe:", err); // Added logging
         res.status(500).json({ error: err.message });
     }
 });
@@ -43,6 +46,7 @@ router.put('/:id', async (req, res) => {
         if (!updatedRecipe) return res.status(404).json({ message: 'Recipe not found' });
         res.json(updatedRecipe);
     } catch (err) {
+        console.error("Error updating recipe:", err); // Added logging
         res.status(500).json({ error: err.message });
     }
 });
@@ -54,6 +58,7 @@ router.delete('/:id', async (req, res) => {
         if (!deletedRecipe) return res.status(404).json({ message: 'Recipe not found' });
         res.json({ message: 'Recipe deleted' });
     } catch (err) {
+        console.error("Error deleting recipe:", err); // Added logging
         res.status(500).json({ error: err.message });
     }
 });
